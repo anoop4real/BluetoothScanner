@@ -9,13 +9,19 @@
 import Foundation
 import CoreBluetooth
 
+enum ScanState: Int{
+    
+    case stopped = 0
+    case inprogress
+}
 class BluetoothManager: NSObject{
     
     var message:Box<String> = Box("")
+    weak var presenter:UIPresenterProtocol?
     fileprivate var centralManager:CBCentralManager!
-    fileprivate var discoverPeripheral: CBPeripheral!
+    fileprivate var discoverPeripherals = [CBPeripheral]()
     var isBluetoothOn:Bool = false
-    
+    var scanState:ScanState = .stopped
     private static let shared = BluetoothManager()
     private override init() {
         super.init()
@@ -33,7 +39,14 @@ class BluetoothManager: NSObject{
             return
         }
         
+        scanState = .inprogress
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+    }
+    
+    func stopScanning(){
+        
+        scanState = .stopped
+        centralManager.stopScan()
     }
     
     fileprivate func addInfo(text: String){
@@ -42,6 +55,20 @@ class BluetoothManager: NSObject{
         
         message.value = msg
         
+    }
+    
+    func numberOfDevicesDetected() -> Int{
+        
+        return discoverPeripherals.count
+    }
+    func deviceAt(index:Int) -> CBPeripheral{
+    
+        return discoverPeripherals[index]
+    }
+    func connectToDeviceAt(index:Int){
+        let device = discoverPeripherals[index]
+        print("Connecting to...\(device.identifier.uuidString)")
+        centralManager.connect(discoverPeripherals[index], options: nil)
     }
     
 }
@@ -61,9 +88,9 @@ extension BluetoothManager: CBCentralManagerDelegate, CBPeripheralDelegate{
         
         let info = "Discovered Device \(advertisementData["kCBAdvDataLocalName"] ?? ""), RSSI:\(RSSI)"
         addInfo(text: info)
-        discoverPeripheral = peripheral
-        
-        centralManager.connect(discoverPeripheral, options: nil)
+        discoverPeripherals.append(peripheral)
+        presenter?.updateUI()
+        //centralManager.connect(discoverPeripheral, options: nil)
         
     }
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?){
@@ -74,6 +101,8 @@ extension BluetoothManager: CBCentralManagerDelegate, CBPeripheralDelegate{
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral){
+        
+        print("Connected to \(peripheral.identifier)")
         peripheral.delegate = self
         peripheral.discoverServices(nil)
     }

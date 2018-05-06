@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iTH-pL-Zh0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Devices-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BlueToothScanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,43 +17,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ch-m1-ptq">
-                                <rect key="frame" x="136" y="69" width="102" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7aJ-yb-VmR"/>
-                                </constraints>
-                                <state key="normal" title="Start Scanning"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aB5-vu-Fw0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="601"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deviceCell" textLabel="kRb-v1-hVG" detailTextLabel="mAd-m9-zDp" style="IBUITableViewCellStyleSubtitle" id="Ra0-jy-lJz">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ra0-jy-lJz" id="w06-lc-h2W">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kRb-v1-hVG">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mAd-m9-zDp">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <action selector="startScanning" destination="BYZ-38-t0r" eventType="touchUpInside" id="vCx-WM-ZhQ"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Nzq-xg-ls1"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="j26-aR-aYd"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wg-f0-SiF">
+                                <rect key="frame" x="0.0" y="598" width="375" height="69"/>
+                                <color key="backgroundColor" red="0.2614474826" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="zbu-ju-ib4"/>
+                                </constraints>
+                                <state key="normal" title="START SCANNING"/>
+                                <connections>
+                                    <action selector="startScanning" destination="BYZ-38-t0r" eventType="touchUpInside" id="1zi-wx-wlb"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="294" placeholderIntrinsicHeight="210" editable="NO" text="Logs appear here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pO4-2p-ZZf">
-                                <rect key="frame" x="40.5" y="182" width="294" height="210"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="294" id="Oy5-JJ-5fj"/>
-                                    <constraint firstAttribute="height" constant="210" id="vx0-Xb-ZQ0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pO4-2p-ZZf" firstAttribute="top" secondItem="8Ch-m1-ptq" secondAttribute="bottom" constant="83" id="Lp9-H0-zpB"/>
-                            <constraint firstItem="8Ch-m1-ptq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="atH-xB-NIb"/>
-                            <constraint firstItem="pO4-2p-ZZf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kEh-dp-Ova"/>
-                            <constraint firstItem="8Ch-m1-ptq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mWq-hg-5dm"/>
+                            <constraint firstItem="0wg-f0-SiF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="196-Wu-6rc"/>
+                            <constraint firstItem="0wg-f0-SiF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1cg-7x-HNc"/>
+                            <constraint firstItem="aB5-vu-Fw0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CdC-In-PJj"/>
+                            <constraint firstItem="aB5-vu-Fw0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Cdk-We-B5Z"/>
+                            <constraint firstItem="0wg-f0-SiF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="sIz-8B-to0"/>
+                            <constraint firstItem="0wg-f0-SiF" firstAttribute="top" secondItem="aB5-vu-Fw0" secondAttribute="bottom" constant="-3" id="x4R-In-pEN"/>
+                            <constraint firstItem="aB5-vu-Fw0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xWh-Ty-eqa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Devices" id="IPo-aA-rki"/>
                     <connections>
-                        <outlet property="textValue" destination="pO4-2p-ZZf" id="KqN-nH-BHR"/>
+                        <outlet property="deviceTable" destination="aB5-vu-Fw0" id="PRt-CM-Nmi"/>
+                        <outlet property="scanButton" destination="0wg-f0-SiF" id="p5k-Zs-KgU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="476" y="133.5832083958021"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="i3t-r2-fHl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iTH-pL-Zh0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DTq-mf-UKZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="slV-JU-oCn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ye2-LX-9rg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-324" y="109"/>
         </scene>
     </scenes>
 </document>
